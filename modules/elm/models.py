@@ -1,4 +1,3 @@
-
 from django.db import models
 
 from modules.directory.models import UserRef
@@ -25,11 +24,17 @@ class LeaveBalance(models.Model):
     class Meta:
         unique_together = ('user', 'year', 'leave_type')
 
+    def __str__(self):
+        return f"{self.user} - {self.leave_type} Balance for {self.year}"
+
 class RestrictedHoliday(models.Model):
     year = models.IntegerField()
     date = models.DateField(unique=True)
     name = models.CharField(max_length=255)
     is_published = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f"{self.name} on {self.date}"
 
 class LeaveApplicationStatus(models.TextChoices):
     PENDING = 'PENDING', 'Pending'
@@ -62,6 +67,9 @@ class LeaveApplication(models.Model):
     )
     created_at = models.DateTimeField(auto_now_add=True)
 
+    def __str__(self):
+        return f"{self.user} - {self.leave_type} from {self.start_date} to {self.end_date}"
+
 class LeaveTransaction(models.Model):
     balance = models.ForeignKey(LeaveBalance, on_delete=models.CASCADE)
     application = models.ForeignKey(LeaveApplication, on_delete=models.SET_NULL, null=True)
@@ -74,3 +82,6 @@ class LeaveTransaction(models.Model):
     )
     days = models.DecimalField(max_digits=4, decimal_places=1)
     created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.balance} - {self.kind} transaction for {self.days} days"
