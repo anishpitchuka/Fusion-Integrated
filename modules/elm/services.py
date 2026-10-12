@@ -4,19 +4,26 @@ from django.db import transaction
 from django.db.models import Sum
 
 from modules.elm.domain import (
-    half_days_overlap, leave_days, validate_balance, validate_rh_date,
-    validate_scl, year_end_lapse)
+    half_days_overlap,
+    leave_days,
+    validate_balance,
+    validate_rh_date,
+    validate_scl,
+    year_end_lapse,
+)
 from modules.elm.models import (
-    LeaveApplication, LeaveBalance, LeaveTransaction, RestrictedHoliday)
+    ANNUAL_ENTITLEMENT,
+    LeaveApplication,
+    LeaveBalance,
+    LeaveTransaction,
+    RestrictedHoliday,
+)
 
-from django.db import transaction, IntegrityError
-from modules.elm.models import LeaveBalance, RestrictedHoliday, LeaveApplication, LeaveTransaction, ANNUAL_ENTITLEMENT
-from modules.elm.domain import leave_days, half_days_overlap, validate_balance, validate_rh_date, validate_scl, year_end_lapse
 
 def ensure_balances(user, year):
     balances = []
     for leave_type in ANNUAL_ENTITLEMENT:
-        balance, created = LeaveBalance.objects.get_or_create(
+        balance, _created = LeaveBalance.objects.get_or_create(
             user=user,
             year=year,
             leave_type=leave_type,

@@ -11,7 +11,10 @@ from fusion_auth.permissions import HasPermission
 from modules.directory.models import UserRef
 from modules.elm import services
 from modules.elm.api.serializers import (
-    ApplyInputSerializer, LeaveApplicationSerializer, LeaveBalanceSerializer)
+    ApplyInputSerializer,
+    LeaveApplicationSerializer,
+    LeaveBalanceSerializer,
+)
 from modules.elm.models import LeaveApplication, LeaveApplicationStatus
 
 

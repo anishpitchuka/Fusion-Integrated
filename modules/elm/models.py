@@ -1,5 +1,6 @@
+
 from django.db import models
-from decimal import Decimal
+
 from modules.directory.models import UserRef
 
 ANNUAL_ENTITLEMENT = {

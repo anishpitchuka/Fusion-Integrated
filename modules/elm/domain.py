@@ -1,5 +1,6 @@
 from decimal import Decimal
 
+
 def leave_days(start_date, end_date, half_day):
     """Calendar days from start_date to end_date inclusive; 0.5 for a half day."""
     if half_day != "NONE":
@@ -22,7 +23,7 @@ def half_days_overlap(a_start, a_end, a_half, b_start, b_end, b_half):
 def validate_balance(requested, entitled, used):
     """
     Validate if the requested days are within the entitlement.
-    
+
     :param requested: The number of days requested as a Decimal.
     :param entitled: The total entitled days as a Decimal.
     :param used: The number of days already used as a Decimal.
@@ -34,7 +35,7 @@ def validate_balance(requested, entitled, used):
 def validate_rh_date(leave_date, published_rh_dates):
     """
     Validate if the leave date is in the list of published holidays.
-    
+
     :param leave_date: The leave date as a datetime.date object.
     :param published_rh_dates: A set of published holiday dates as datetime.date objects.
     :raises ValueError: If the leave date is not in the list of published holidays.
@@ -45,7 +46,7 @@ def validate_rh_date(leave_date, published_rh_dates):
 def validate_scl(requested, used_this_year, admissible):
     """
     Validate if the SCL request is within the allowed limits.
-    
+
     :param requested: The number of days requested as a Decimal.
     :param used_this_year: The number of days already used this year as a Decimal.
     :param admissible: A boolean indicating if the request is admissible.
@@ -57,7 +58,7 @@ def validate_scl(requested, used_this_year, admissible):
 def year_end_lapse(entitled, used):
     """
     Calculate the amount to lapse at year-end for CL and RH.
-    
+
     :param entitled: The total entitled days as a Decimal.
     :param used: The number of days already used as a Decimal.
     :return: The amount to lapse as a Decimal (never below 0).
